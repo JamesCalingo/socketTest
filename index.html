@@ -11,14 +11,19 @@
   <title>Socket Testing 1.0!</title>
 </head>
 
-<body>
+<body class="bg-info">
   <h1>Welcome to Chat!</h1>
+  <p>First of all, what's your name?</p>
+  <form id="username">
+    <input id="name" autocomplete="off" />
+    <button class="btn btn-success">Enter room</button>
+  </form>
   <div class="card">
     <div class="card-header"><strong>Messages go here</strong></div>
     <ul id="messages"></ul>
   </div>
   Add a message
-  <form action="">
+  <form id="chat">
     <input id="m" autocomplete="off" />
     <button class="btn btn-success">Send</button>
   </form>
@@ -28,12 +33,27 @@
   <script>
     $(function () {
       var socket = io();
-      $('form').submit(function (e) {
+      socket.on('connection', function(){
+        console.log("someone's here!")
+      })
+
+      $("#username").submit(function(e){
+        e.preventDefault();
+        console.log($("#name").val());
+        socket.emit("change username",{username: $("#name").val()})
+      })
+
+      $('#chat').submit(function (e) {
         e.preventDefault(); // prevents page reloading
         socket.emit('chat message', $('#m').val());
         $('#m').val('');
         return false;
       });
+
+      socket.on("change username", function (name){
+        console.log(name);
+        $("#messages").append(`<li class="list-unstyled`).text(`${name} has entered.`)
+      })
       socket.on('chat message', function (msg) {
         console.log(msg);
         $("#messages").append($(`<li class="list-unstyled">`).text(msg));
