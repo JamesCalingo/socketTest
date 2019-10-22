@@ -34,14 +34,15 @@
     $(function () {
       var socket = io();
       socket.on('connection', function(){
-        console.log("someone's here!")
-      })
+        console.log("someone's here!");
+        localStorage.getItem("chat")
+      });
 
       $("#username").submit(function(e){
         e.preventDefault();
         console.log($("#name").val());
         socket.emit("change username",{username: $("#name").val()})
-      })
+      });
 
       $('#chat').submit(function (e) {
         e.preventDefault(); // prevents page reloading
@@ -57,6 +58,7 @@
       socket.on('chat message', function (msg) {
         console.log(msg);
         $("#messages").append($(`<li class="list-unstyled">`).text(msg));
+        localStorage.setItem("chat", msg)
       });
     });
   </script>

@@ -18,7 +18,7 @@ but if you want it locally, you can clone the repo and then run
 ```
 node server.js
 ```
-in Terminal or GitBash. Just be aware that if you do this, you can only run "chats" through the browsers on your machine - you will not be able to communicate between different devices.
+in Terminal or GitBash. Just be aware that if you do this, you can only run "chats" through the browsers on your machine - you will not be able to communicate between different devices (i.e. a laptop and a smartphone).
 
 # The future for this app
 I believe there is a way for there to be a "master" user so that the answers aren't broadcast to all of the players, and also to have the "master" user broadcast the responses to all. Also, in the future, there is a way to "store" messages because currently, messages are lost when the user refreshes/if a user joins the room after messages are sent, they have no way of seeing previous messages.
